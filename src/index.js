@@ -2,26 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import { useState } from "react";
 
-const App = (props) => {
-  return <h1>{props.contadorInicial}</h1>;
+const App = () => {
+  const [stateCount, setStateCount] = useState(13);
+
+  setInterval(() => {
+    setStateCount(stateCount);
+  }, 2000);
+  return <h1>{stateCount}</h1>;
 };
 
-let contador = 0;
-
-const refresh = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App contadorInicial={contador} />
-    </React.StrictMode>,
-    document.getElementById("root")
-  );
-};
-
-setInterval(() => {
-  contador++;
-  refresh();
-}, 1000);
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
