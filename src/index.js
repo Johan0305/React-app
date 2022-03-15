@@ -4,32 +4,29 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { useState } from "react";
 
-const Counter = (props) => <h1>{props.number}</h1>;
-
 const App = () => {
-  const [stateCount, setStateCount] = useState(0);
-  let updateContador = (dOi) => {
-    if (dOi === "increment") {
-      setStateCount(stateCount + 1);
-    } else if (dOi === "decrem") {
-      setStateCount(stateCount - 1);
+  /*const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);*/
+
+  const [LR, setStateLR] = useState({
+    left: 0,
+    right: 0,
+  });
+
+  const leftOrRight = (whatButton) => {
+    if (whatButton === "left") {
+      setStateLR({ left: LR.left + 1, right: LR.right });
+    } else if (whatButton === "right") {
+      setStateLR({ left: LR.left, right: LR.right + 1 });
     }
   };
-  let contadorCero = () => setStateCount(0);
+
   return (
     <div>
-      <p>el valor del contador es</p>
-      <Counter number={stateCount} />
-      <button
-        onClick /*a onClick siempre se le debe pasar una función o en sí a cualquier evento, si se quiere hacer lo de en este caso asignar un nombre a on OnClick, debemos hacer una función y luego si, pasar la función donde se ejecuta el codigo y su respectivo contenido FunciónEjemplo("asignación")*/={() =>
-          updateContador("increment")
-        }
-      >
-        Incrementar
-      </button>
-      <button onClick={() => updateContador("decrem")}>decrementar</button>
-      <button onClick={contadorCero}>Reset</button>
-      <p>{stateCount % 2 === 0 ? "Es par" : "es impar"}</p>
+      {LR.left}
+      <button onClick={() => leftOrRight("left")}>left</button>
+      <button onClick={() => leftOrRight("right")}>right</button>
+      {LR.right}
     </div>
   );
 };
